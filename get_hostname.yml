@@ -1,8 +1,9 @@
 ---
 - name: Get VM hostnames 
   hosts: rhtest
+  gather_facts: no 
   
   tasks:
   - name: Get hostname
-    debug: msg="This machine hostname is {{ hostvars['host'].name }}"
+    debug: msg="This machine hostname is {{ hostvars['inventory_hostname'].name }}"
 ...
