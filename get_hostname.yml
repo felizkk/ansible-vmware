@@ -4,6 +4,9 @@
   gather_facts: no 
   
   tasks:
+  - name: Get facts
+    debug: var=ansible_facts
+
   - name: Get hostname
     debug: msg="This machine hostname is {{ hostvars['ansible_host'].name }}"
 ...
