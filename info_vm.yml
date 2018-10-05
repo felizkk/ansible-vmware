@@ -5,5 +5,5 @@
   
   tasks:
   - name: Print Details
-    debug: msg="hostname {{ name }}, guestid {{ guest.guestid }}, ipaddress {{ guest.ipaddress }}"
+    debug: msg="hostname {{ name }}, guestid {{ guest.guestid }}, IP {{ guest.ipaddress }}"
 ...
