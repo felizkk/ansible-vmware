@@ -1,0 +1,16 @@
+---
+- name: Subscribe to Ingram Micro RHEL Standard Subscriptions
+  hosts: rhtest1.internal.pineview.co.nz
+  
+  tasks:
+  - name: Update hostname
+    hostname:
+      name: "{{ name }}" 
+    
+  - name: Register and attach RHEL Std Pool ID
+    redhat_subscription:
+      state: present
+      username: feliz.karnadi@ingrammicro.com
+      password: F3l12kar
+      pool_ids: 8a85f98c614d3a8001614d85642c223e
+...

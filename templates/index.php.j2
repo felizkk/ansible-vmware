@@ -30,16 +30,12 @@ img {
 </head>
 <body>
 <div class="hostname">
-    <p>This hostname: {{ name }}</p>
+    <p>This Webserver:&nbsp;&nbsp;{{ name }}</p>
+    <p>PHP Date:&nbsp;&nbsp;<?php echo date ('l jS \of F Y h:i:s A'); ?></p>
 </div>
 <div class="container">
     <img src="https://www.ansible.com/hubfs/2016_Images/Assets/Ansible-Tower-Logotype-Small-RGB-FullBlack.png"/>
     <p>{{ apache_test_message }}</p>
-</div>
-<div class="hostname">
-    <p>
-        <script> document.write(new Date().tolocalDateString()); </script>
-    </p>
 </div>
 <footer>{{ inventory_hostname }}<br />Ansible by Red Hat</footer>
 </body>
