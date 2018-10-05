@@ -5,5 +5,5 @@
   
   tasks:
   - name: Get hostname
-    debug: msg="This machine hostname is {{ hostvars['host'].name }}"
+    debug: msg="This machine hostname is {{ hostvars['ansible_host'].name }}"
 ...
