@@ -4,6 +4,9 @@
   gather_facts: no 
   
   tasks:
+  - name: Print name
+    debug: var=name
+
   - name: Get facts
     debug: var=ansible_facts
 
