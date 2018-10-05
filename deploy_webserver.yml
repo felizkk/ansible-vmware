@@ -83,7 +83,7 @@
   - name: update html file
     template:
       src: templates/index.php.j2
-      dest: /var/www/html/index.html
+      dest: /var/www/html/index.php
     tags:
       - http
 
