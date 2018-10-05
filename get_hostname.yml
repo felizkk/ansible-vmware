@@ -4,5 +4,5 @@
   
   tasks:
   - name: Get hostname
-    debug: msg="This machine hostname is {{ hostvars['config'].name }}"
+    debug: msg="This machine hostname is {{ hostvars['host'].name }}"
 ...
