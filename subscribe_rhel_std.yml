@@ -1,6 +1,7 @@
 ---
 - name: Subscribe to Ingram Micro RHEL Standard Subscriptions
   hosts: rhtest
+  gather_facts: no
   
   tasks:
   - name: Update hostname
