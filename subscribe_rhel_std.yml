@@ -1,0 +1,16 @@
+---
+- name: Subscribe to Ingram Micro RHEL Standard Subscriptions
+  hosts: rhtest
+  
+  tasks:
+  - name: Update hostname
+    hostname:
+      name: hostvars['name']
+    
+  - name: Register and attach RHEL Std Pool ID
+    redhat_subscription:
+      state: present
+      username: "{{ redhat_user }}"
+      password: "{{ redhat_pass }}"
+      pool_ids: "{{ redhat_poolid }}"
+...
