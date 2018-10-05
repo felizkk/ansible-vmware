@@ -1,0 +1,103 @@
+---
+- name: simple playbook with templates for webserver
+  hosts: rhtest 
+
+  vars:
+    - http_port: 80
+    - apache_test_message: I understand Ansible very well
+    - apache_max_keep_alive_requests: 115
+    - ntpserver: 0.nz.pool.ntp.org
+
+  tasks:
+  - name: install apache (red hat)
+    yum:
+      name: httpd
+      state: latest
+    when:
+      - ansible_distribution == "RedHat"
+      - ansible_distribution_major_version == "7"
+    tags:
+      - http
+  - name: install apache (ubuntu )
+    apt:
+      name: httpd
+      state: latest
+    when:
+      - ansible_distribution == "Ubuntu"
+    tags:
+      - http
+
+  - name: start apache
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+    tags:
+      - http 
+
+  - name: enable http port {{ http_port }}
+    firewalld:
+      port: "{{ http_port }}/tcp"
+      state: enabled
+      permanent: true
+    notify: restart firewall
+    tags:
+      - http
+      - firewall
+
+  - name: install common packages
+    yum:
+      name: "{{ item }}"
+      state: latest
+    with_items:
+      - php
+      - python
+      - ntp
+    tags:
+      - ntp
+
+  - name: start ntp 
+    service:
+      name: ntpd
+      state: started
+      enabled: yes
+    tags:
+      - ntp
+
+  - name: update ntp config
+    template:
+      src: templates/ntp.conf.j2
+      dest: /etc/ntp.conf
+    notify: restart ntp
+    tags:
+      - ntp
+
+  - name: update apache config file
+    template:
+      src: templates/httpd.conf.j2
+      dest: /etc/httpd/conf/httpd.conf
+    notify: restart apache
+    tags:
+      - http
+
+  - name: update html file
+    template:
+      src: templates/index.html.j2
+      dest: /var/www/html/index.html
+    tags:
+      - http
+
+  handlers:
+  - name: restart firewall
+    service:
+      name: firewalld
+      state: restarted
+  - name: restart apache
+    service:
+      name: httpd
+      state: restarted
+  - name: restart ntp
+    service:
+      name: ntpd
+      state: restarted
+...
