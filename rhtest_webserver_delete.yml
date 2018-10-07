@@ -1,0 +1,29 @@
+---
+- name: Delete Virtual Machine 
+  hosts: rhtest
+  gather_facts: no
+  
+  tasks:
+  - name: Unregister RHEL machine
+    redhat_subscription:
+      state: absent 
+      username: "{{ redhat_user }}"
+      password: "{{ redhat_pass }}"
+      pool_ids: "{{ redhat_poolid }}"
+    when:
+      - {{ name }} == {{ vcenter_guest_name }}
+
+  - name: Power off machine
+    vmware_guest:
+      hostname: "{{ vcenter_host }}"
+      username: "{{ vcenter_user }}"
+      password: "{{ vcenter_pass }}"
+      validate_certs: "{{ vcenter_validate_certs }}"
+      name: "{{ vcenter_guest_name }}"
+      datacenter: "RedHat Test Environment"
+      cluster: "RedHat"
+      state: poweredoff
+    when:
+      - {{ name }} == {{ vcenter_guest_name }}
+    delegate_to: localhost
+...

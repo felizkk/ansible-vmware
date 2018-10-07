@@ -1,0 +1,65 @@
+---
+- name: simple playbook to remove webserver
+  hosts: rhtest 
+  gather_facts: no
+  
+  vars:
+    - http_port: 80
+
+  tasks:
+  - name: stop apache
+    ignore_errors: true
+    service:
+      name: httpd
+      state: stopped
+      enabled: no
+  - name: disable http port {{ http_port }} 
+    firewalld:
+      port: "{{ http_port }}/tcp"
+      state: disabled
+      permanent: true 
+    notify: restart firewall
+  - name: remove apache
+    yum:
+      name: httpd
+      state: absent
+
+  - name: stop ntp
+    ignore_errors: true
+    service: 
+      name: ntpd
+      state: stopped
+      enabled: no
+
+  - name: remove common packages, except python
+    yum:
+      name: "{{ item }}"
+      state: absent
+    with_items:
+      - php
+      - ntp
+
+  - name: remove ntp config file
+    file:
+      path: /etc/ntp.conf
+      state: absent
+
+  - name: remove httpd config file
+    file:
+      path: /etc/httpd/conf/httpd.conf
+      state: absent
+
+  - name: remove html file
+    file:
+      path: "{{ item }}"
+      state: absent
+    with_items:
+      - "/var/www/html/index.html"
+      - "/var/www/html/index.php"
+
+  handlers:
+  - name: restart firewall
+    service:
+      name: firewalld
+      state: restarted
+...
