@@ -1,6 +1,0 @@
-[servers]
-rhtest1.internal.pineview.co.nz 
-
-[servers:vars]
-ansible_ssh_user=root 
-ansible_ssh_pass=redhat
