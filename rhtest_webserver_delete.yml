@@ -11,7 +11,7 @@
       password: "{{ redhat_pass }}"
       pool_ids: "{{ redhat_poolid }}"
     when:
-      - "{{ name }} == {{ vcenter_guest_name }}"
+      - name == {{ vcenter_guest_name }}
 
   - name: Power off machine
     vmware_guest:
@@ -24,6 +24,6 @@
       cluster: "RedHat"
       state: poweredoff
     when:
-      - "{{ name }} == {{ vcenter_guest_name }}"
+      - name == {{ vcenter_guest_name }}
     delegate_to: localhost
 ...
