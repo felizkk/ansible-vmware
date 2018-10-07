@@ -22,8 +22,6 @@
       datacenter: "RedHat Test Environment"
       cluster: "RedHat"
       state: poweredoff
-    when:
-      - name == vcenter_guest_name
     delegate_to: localhost
 
   - name: Delete Virtual Machine
@@ -36,7 +34,5 @@
       datacenter: "RedHat Test Environment"
       cluster: "RedHat"
       state: absent
-    when:
-      - name == vcenter_guest_name
     delegate_to: localhost
 ...
