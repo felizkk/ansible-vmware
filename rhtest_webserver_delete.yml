@@ -12,7 +12,7 @@
     when:
       - name == vcenter_guest_name
 
-  - name: Power off machine
+  - name: Power off Virtual Machine
     vmware_guest:
       hostname: "{{ vcenter_host }}"
       username: "{{ vcenter_user }}"
@@ -22,6 +22,20 @@
       datacenter: "RedHat Test Environment"
       cluster: "RedHat"
       state: poweredoff
+    when:
+      - name == vcenter_guest_name
+    delegate_to: localhost
+
+  - name: Delete Virtual Machine
+    vmware_guest:
+      hostname: "{{ vcenter_host }}"
+      username: "{{ vcenter_user }}"
+      password: "{{ vcenter_pass }}"
+      validate_certs: "{{ vcenter_validate_certs }}"
+      name: "{{ vcenter_guest_name }}"
+      datacenter: "RedHat Test Environment"
+      cluster: "RedHat"
+      state: absent
     when:
       - name == vcenter_guest_name
     delegate_to: localhost
