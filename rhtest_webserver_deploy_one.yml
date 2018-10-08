@@ -3,14 +3,11 @@
   hosts: rhtest
   gather_facts: no
   tasks:
-  - setup:
+  - add_host:
+      name: "{{ ansible_host }}"
+      groups: target_single_host
     when:
       - name == vcenter_guest_name
-
-#  - add_host:
-#      groups: target_single_host
-#    when:
-#      - name == vcenter_guest_name
 
 - name: Simple playbook with templates for webserver
   hosts: target_single_host
