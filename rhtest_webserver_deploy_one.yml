@@ -6,7 +6,6 @@
   - ping:
 
   - add_host:
-      name: "{{ name }}"
       groups: target_single_host
     when:
       - name == vcenter_guest_name
