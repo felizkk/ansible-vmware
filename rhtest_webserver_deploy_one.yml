@@ -3,10 +3,11 @@
   hosts: rhtest
   tasks:
   - add_host:
-      name: "{{ ansible_host }}"
+      hostname: 10.68.158.113
+#      name: "{{ ansible_host }}"
       groups: target_single_host
-    when:
-      - name == vcenter_guest_name
+#    when:
+#      - name == vcenter_guest_name
 
 - name: Simple playbook with templates for webserver
   hosts: target_single_host
