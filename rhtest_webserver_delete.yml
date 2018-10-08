@@ -1,17 +1,9 @@
 ---
 - name: Delete Virtual Machine 
-  hosts: rhtest
+  hosts: localhost 
   gather_facts: no
   
   tasks:
-  - name: Unregister RHEL machine
-    redhat_subscription:
-      state: absent 
-      username: "{{ redhat_user }}"
-      password: "{{ redhat_pass }}"
-    when:
-      - name == vcenter_guest_name
-
   - name: Power off Virtual Machine
     vmware_guest:
       hostname: "{{ vcenter_host }}"
