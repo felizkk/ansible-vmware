@@ -1,0 +1,18 @@
+---
+- name: Subscribe to Ingram Micro RHEL Standard Subscriptions (One Host)
+  hosts: "{{ vcenter_guest_name }}*" 
+  gather_facts: no
+  
+  tasks:
+  - name: Update hostname
+    hostname:
+      # The variable Name is sourced from dynamic inventory variable
+      name: "{{ name }}"
+    
+  - name: Register and attach RHEL Std Pool ID
+    redhat_subscription:
+      state: present
+      username: "{{ redhat_user }}"
+      password: "{{ redhat_pass }}"
+      pool_ids: "{{ redhat_poolid }}"
+...
