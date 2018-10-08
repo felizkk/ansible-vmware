@@ -18,7 +18,7 @@ Sample varilables:
 - vcenter_vars : required vcenter credentials. On Ansible Tower, you should be using survey
 
 Suggested Ansible Tower Workflow with Survey:
-- Ping : dynamic inventory sync --> ping
-- Deploy : dynamic inventory sync --> subscribe_one --> deploy_one
-- Delete: unsubscribe --> delete
+- Ping     : dynamic inventory sync --> ping
+- Deploy   : dynamic inventory sync --> subscribe_one --> deploy_one
+- Delete   : unsubscribe --> delete
 
