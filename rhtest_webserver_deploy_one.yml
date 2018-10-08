@@ -9,7 +9,7 @@
 #      - ansible_fqdn == vcenter_guest_name
 
 - name: Simple playbook with templates for webserver
-  hosts: "{{ vcenter_guest_name }}"
+  hosts: "{{ vcenter_guest_name }}*"
 
   vars:
     - http_port: 80
