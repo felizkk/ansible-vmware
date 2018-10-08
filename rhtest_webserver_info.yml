@@ -4,6 +4,6 @@
   gather_facts: no 
   
   tasks:
-  - name: Print Details
-    debug: msg="hostname {{ name }}, guestid {{ guest.guestid }}, IP {{ guest.ipaddress }}"
+  - name: Print Details (hostname, guestid, ip address)
+    debug: msg="{{ name }}, {{ guest.guestid }}, {{ guest.ipaddress }}"
 ...
