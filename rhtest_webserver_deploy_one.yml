@@ -3,6 +3,8 @@
   hosts: rhtest
   gather_facts: no
   tasks:
+  - ping:
+
   - add_host:
       name: "{{ name }}"
       groups: target_single_host
