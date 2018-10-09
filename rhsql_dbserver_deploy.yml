@@ -1,21 +1,34 @@
 ---
 - name: Simple DBServer Deployment 
-  hosts: "{{ vcenter_guest_name }}"
+  hosts: "{{ vcenter_guest_name }}" 
 
   vars:
-    - ntpserver: 0.nz.pool.ntp.org
+    - mysqlrepo: "http://repo.mysql.com/mysql-community-release-el7-7.noarch.rpm"
+    - ntpserver: "0.nz.pool.ntp.org"
 
   tasks:
-  - name: install mariadb server
+  - name: install mysql community server repo
     yum:
-      name: mariadb-server
-      state: latest
+      name: "{{ mysqlrepo }}"
+      state: present
 
-  - name: start mariadb 
+  - name: install mysql community server, mysql-python, and ntp
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - mysql-server
+      - MySQL-python
+      - ntp
+
+  - name: start mysql and ntp
     service:
-      name: mariadb
+      name: "{{ item }}" 
       state: started
       enabled: yes
+    with_items:
+      - mysqld
+      - ntpd
 
   - name: enable mysql port 3306
     firewalld:
@@ -23,17 +36,6 @@
       state: enabled
       permanent: true
     notify: restart firewall
-
-  - name: install ntp 
-    yum:
-      name: ntp 
-      state: latest
-
-  - name: start ntp 
-    service:
-      name: ntpd
-      state: started
-      enabled: yes
 
   - name: update ntp config
     template:

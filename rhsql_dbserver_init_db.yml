@@ -1,23 +1,38 @@
 ---
 - name: Simple MariaDB Initial Database Creation
-  hosts: "{{ vcenter_guest_name }}"
+  hosts: "{{ vcenter_guest_name }}" 
 
   tasks:
-  - name: create mysql user : ansible
+  - name: create a mysql user named ansible
     mysql_user:
       name: ansible
       password: redhat
-      priv: "*.*:ALL, GRANT"
+      priv: "*.*:ALL"
       state: present
 
-  - name: create database
+  - name: create database named theredteam
     mysql_db:
       name: theredteam
       state: present
 
-  - name: create database initial entries (drop if exist)
+  - name: copy sql file to target vm
+    copy:
+      src: templates/init_table.sql
+      dest: /tmp/init_table.sql
+
+  - name: create initial database table and entries
     mysql_db:
       name: theredteam
+      login_user: ansible
+      login_password: redhat
       state: import
-      target: templates/init_table.sql
+      target: /tmp/init_table.sql
+
+  - name: test table output
+    command: 'mysql -uansible -predhat theredteam -e "select * from member;"'
+    register: tableoutput
+
+  - name: display table output
+    debug:
+      var: tableoutput.stdout_lines
 ...
