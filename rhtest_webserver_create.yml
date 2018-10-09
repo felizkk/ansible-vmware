@@ -14,7 +14,6 @@
       password: "{{ vcenter_pass }}"
       validate_certs: "{{ vcenter_validate_certs }}"
       name: "{{ vcenter_guest_name }}" 
-      guest_id: rhel7_64Guest
       template: "{{ vcenter_template_name }}"
       datacenter: "RedHat Test Environment"
       cluster: "RedHat"
