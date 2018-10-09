@@ -42,7 +42,7 @@
     notify: restart ntp
 
   handlers:
-  - name: restart firewalld 
+  - name: restart firewall 
     service:
       name: firewalld
       state: restarted
