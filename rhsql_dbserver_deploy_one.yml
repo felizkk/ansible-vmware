@@ -1,0 +1,53 @@
+---
+- name: Simple playbook with templates for webserver
+  hosts: "{{ vcenter_guest_name }}*"
+
+  vars:
+    - ntpserver: 0.nz.pool.ntp.org
+
+  tasks:
+  - name: install mariadb server
+    yum:
+      name: mariadb-server
+      state: latest
+
+  - name: start mariadb 
+    service:
+      name: mariadb
+      state: started
+      enabled: yes
+
+  - name: enable mysql port 3306
+    firewalld:
+      port: "3306/tcp"
+      state: enabled
+      permanent: true
+    notify: restart firewall
+
+  - name: install ntp 
+    yum:
+      name: ntp 
+      state: latest
+
+  - name: start ntp 
+    service:
+      name: ntpd
+      state: started
+      enabled: yes
+
+  - name: update ntp config
+    template:
+      src: templates/ntp.conf.j2
+      dest: /etc/ntp.conf
+    notify: restart ntp
+
+  handlers:
+  - name: restart firewalld 
+    service:
+      name: firewalld
+      state: restarted
+  - name: restart ntp
+    service:
+      name: ntpd
+      state: restarted
+...
