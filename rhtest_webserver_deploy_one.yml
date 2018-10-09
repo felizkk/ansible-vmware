@@ -4,7 +4,7 @@
 
   vars:
     - http_port: 80
-    - apache_test_message: I understand Ansible very well
+    - apache_test_message: "{{ apache_test_message }}" 
     - apache_max_keep_alive_requests: 115
     - ntpserver: 0.nz.pool.ntp.org
 
