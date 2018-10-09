@@ -1,0 +1,23 @@
+---
+- name: Simple MariaDB Initial Database Creation
+  hosts: "{{ vcenter_guest_name }}"
+
+  tasks:
+  - name: create mysql user : ansible
+    mysql_user:
+      name: ansible
+      password: redhat
+      priv: "*.*:ALL, GRANT"
+      state: present
+
+  - name: create database
+    mysql_db:
+      name: theredteam
+      state: present
+
+  - name: create database initial entries (drop if exist)
+    mysql_db:
+      name: theredteam
+      state: import
+      target: templates/init_table.sql
+...
