@@ -1,6 +1,6 @@
 ---
-- name: Simple playbook with templates for webserver
-  hosts: "{{ vcenter_guest_name }}*"
+- name: Simple DBServer Deployment 
+  hosts: "{{ vcenter_guest_name }}"
 
   vars:
     - ntpserver: 0.nz.pool.ntp.org
@@ -40,13 +40,6 @@
       src: templates/ntp.conf.j2
       dest: /etc/ntp.conf
     notify: restart ntp
-
-  - name: create mysql user : ansible
-    mysql_user:
-      name: ansible
-      password: redhat
-      priv: "*.*:ALL, GRANT"
-      state: present
 
   handlers:
   - name: restart firewall 
