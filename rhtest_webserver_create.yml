@@ -1,5 +1,5 @@
 ---
-- name: playbook to create a new rhel7_64 guest from template
+- name: playbook to create a new VM from template
   hosts: localhost
   connection: local
   gather_facts: no
@@ -7,7 +7,7 @@
     - vcenter_vars.yml
 
   tasks:
-  - name: Clone the vCenter RHEL7 template
+  - name: Clone the vCenter template
     vmware_guest:
       hostname: "{{ vcenter_host }}"
       username: "{{ vcenter_user }}"
