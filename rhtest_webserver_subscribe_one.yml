@@ -7,7 +7,7 @@
   - name: Update hostname
     hostname:
       # The variable Name is sourced from dynamic inventory variable
-      name: "{{ name }}"
+      name: "{{ vcenter_guest_name }}"
     
   - name: Register and attach RHEL Std Pool ID
     redhat_subscription:
