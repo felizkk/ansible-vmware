@@ -1,6 +1,7 @@
 ---
-- name: Simple MariaDB Initial Database Creation
-  hosts: "{{ vcenter_guest_name }}" 
+- name: Simple MySQL Initial Database Creation
+  hosts: "{{ vcenter_guest_name }}"
+  gather_facts: no
 
   tasks:
   - name: create a mysql user named ansible
