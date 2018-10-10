@@ -3,21 +3,15 @@
   hosts: "{{ vcenter_guest_name }}" 
 
   vars:
-    - mysqlrepo: "http://repo.mysql.com/mysql-community-release-el7-7.noarch.rpm"
     - ntpserver: "0.nz.pool.ntp.org"
 
   tasks:
-  - name: install mysql community server repo
-    yum:
-      name: "{{ mysqlrepo }}"
-      state: present
-
-  - name: install mysql community server, mysql-python, and ntp
+  - name: install mysql server, mysql-python, and ntp
     yum:
       name: "{{ item }}"
       state: present
     with_items:
-      - mysql-server
+      - mariadb-server
       - MySQL-python
       - ntp
 
