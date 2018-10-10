@@ -22,7 +22,7 @@
       state: started
     with_items:
       - haproxy
-      - ntp
+      - ntpd
 
   - name: enable http port {{ http_port }}
     firewalld:
