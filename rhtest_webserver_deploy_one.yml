@@ -10,16 +10,31 @@
   tasks:
   - name: install apache (red hat)
     yum:
-      name: httpd
+      name: "{{ item }}"
       state: latest
+    with_items:
+      - httpd
+      - php-mysql
+    when:
+      - ansible_distribution == "RedHat"
+      - ansible_distribution_major_version == "7"
+
+  - name: Set SELinux to allow httpd to connect to external database
+    seboolean:
+      name: httpd_can_network_connect
+      state: yes
+      persistent: yes
     when:
       - ansible_distribution == "RedHat"
       - ansible_distribution_major_version == "7"
 
   - name: install apache (ubuntu )
     apt:
-      name: httpd
+      name: "{{ item }}" 
       state: latest
+    with_items:
+      - httpd
+      - php-mysql
     when:
       - ansible_distribution == "Ubuntu"
 
