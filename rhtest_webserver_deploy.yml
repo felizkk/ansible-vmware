@@ -14,8 +14,10 @@
       state: latest
     with_items:
       - httpd
+      - php
       - php-mysql
       - libsemanage-python
+      - ntp
     when:
       - ansible_distribution == "RedHat"
       - ansible_distribution_major_version == "7"
@@ -35,7 +37,9 @@
       state: latest
     with_items:
       - httpd
+      - php
       - php-mysql
+      - ntp
     when:
       - ansible_distribution == "Ubuntu"
 
@@ -51,14 +55,6 @@
       state: enabled
       permanent: true
     notify: restart firewall
-
-  - name: install common packages
-    yum:
-      name: "{{ item }}"
-      state: latest
-    with_items:
-      - php
-      - ntp
 
   - name: start ntp 
     service:
@@ -89,8 +85,8 @@
       dest: /var/www/html/
     with_items:
       - templates/ingram_micro.png
-      - ansible-tower-small.png
-      - style.css
+      - templates/ansible-tower-small.png
+      - templates/style.css
 
   handlers:
   - name: restart firewall
