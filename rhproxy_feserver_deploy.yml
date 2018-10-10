@@ -1,6 +1,6 @@
 ---
 - name: simple playbook with templates for webserver
-  hosts: rhproxy 
+  hosts: "{{ vcenter_guest_name }}" 
 
   tasks:
   - name: Install httpie, haproxy packages
@@ -16,13 +16,14 @@
       enabled: yes
       state: started
 
-  # Config file has been configured to support dynamic inventory
+  # Config file has been configured to support dynamic inventory rhtest
   - name: Update haproxy config is the latest
     template:
       src: templates/haproxy.cfg.j2
       dest: /etc/haproxy/haproxy.cfg
     notify: restart haproxy
 
+  handlers:
   - name: restart haproxy
     service:
       name: haproxy
