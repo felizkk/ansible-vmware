@@ -1,6 +1,6 @@
 ---
 - name: simple playbook with templates for webserver
-  hosts: "{{ vcenter_guest_name }}" 
+  hosts: "{{ vcenter_guest_name }}"
 
   vars:
     - http_port: 80

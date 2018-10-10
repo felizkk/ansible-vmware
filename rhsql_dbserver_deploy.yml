@@ -1,6 +1,6 @@
 ---
 - name: Simple DBServer Deployment 
-  hosts: "{{ vcenter_guest_name }}" 
+  hosts: "{{ vcenter_guest_name }}"
 
   vars:
     - ntpserver: "0.nz.pool.ntp.org"
