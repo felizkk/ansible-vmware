@@ -13,6 +13,10 @@ Some Ansible Playbook examples for simple VMWare vCenter workloads
 - rhtest_webserver_delete        : delete a VM
 - rhtest_webserver_info          : display hostname, guestid, and IP address of all VMs (rhtest group)
 - rhtest_webserver_ping          : test ssh connection to all VMs (rhtest group)
+- rhsql_dbserver_deploy          : deploy a mariadb (mysql) database server
+- rhsql_dbserver_init_db         : create a mysql user, re-create database (drop), create some entries
+- rhsql_dbserver_insert_db       : insert a new row to member table based on input (tower survey)
+- rhproxy_feserver_deploy        : deploy a frontend server (haproxy) that takes dynamic inventory
 
 Sample varilables:
 - vcenter_vars : required vcenter credentials. On Ansible Tower, you should be using survey
