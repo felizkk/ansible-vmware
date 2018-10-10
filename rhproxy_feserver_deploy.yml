@@ -1,0 +1,31 @@
+---
+- name: simple playbook with templates for webserver
+  hosts: rhproxy 
+
+  tasks:
+  - name: Install httpie, haproxy packages
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - httpie
+      - haproxy
+
+  - name: Ensure haproxy is enabled at boot and started
+    service:
+      name: haproxy
+      enabled: yes
+      state: started
+
+  # Config file has been configured to support dynamic inventory
+  - name: Update haproxy config is the latest
+    template:
+      src: templates/haproxy.cfg.j2
+      dest: /etc/haproxy/haproxy.cfg
+    notify: restart haproxy
+
+  - name: restart haproxy
+    service:
+      name: haproxy
+    state: restarted
+...
