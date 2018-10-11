@@ -16,7 +16,7 @@
   - name: disable http port {{ http_port }}
     firewalld:
       port: "{{ http_port }}/tcp"
-      state: disables
+      state: disabled
       permanent: true
     notify: restart firewall
 
