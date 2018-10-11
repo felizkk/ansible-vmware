@@ -1,6 +1,6 @@
 ---
 - name: Simple DBServer Deployment 
-  hosts: "{{ vcenter_guest_name }}"
+  hosts: rhsql
 
   tasks:
   - name: remove mysql server, mysql-python, and ntp
