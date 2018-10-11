@@ -2,6 +2,9 @@
 - name: simple playbook with templates for webserver
   hosts: rhproxy
 
+  vars:
+    - http_port: 80
+
   tasks:
   - name: remove haproxy
     yum:

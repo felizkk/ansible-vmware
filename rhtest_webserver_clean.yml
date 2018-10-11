@@ -2,7 +2,10 @@
 - name: simple playbook to remove webserver
   hosts: rhtest 
   gather_facts: no
-  
+
+  vars:
+    - http_port: 80
+
   tasks:
   - name: remove apache
     yum:
@@ -27,7 +30,7 @@
       port: "{{ http_port }}/tcp"
       state: disabled
       permanent: true 
-    notify: restart firewall      
+    notify: restart firewall
 
   handlers:
   - name: restart firewall
