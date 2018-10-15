@@ -8,6 +8,7 @@
     pip:
       name: httpie
       state: present
+    delegate_to: localhost  
 
   - name: http fetch 1 - get Automation
     shell: "http GET http://{{ ansible_default_ipv4.address }} -b | grep 'Automation' | head -1 | awk '{print $2}'"
