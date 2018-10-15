@@ -1,15 +1,11 @@
 ---
-- name: Delete Virtual Machine 
+- name: VMWare Delete Virtual Machine 
   hosts: localhost 
   gather_facts: no
   
   tasks:
   - name: Power off Virtual Machine
     vmware_guest:
-      hostname: "{{ vcenter_host }}"
-      username: "{{ vcenter_user }}"
-      password: "{{ vcenter_pass }}"
-      validate_certs: "{{ vcenter_validate_certs }}"
       name: "{{ vcenter_guest_name }}"
       datacenter: "RedHat Test Environment"
       cluster: "RedHat"
@@ -18,10 +14,6 @@
 
   - name: Delete Virtual Machine
     vmware_guest:
-      hostname: "{{ vcenter_host }}"
-      username: "{{ vcenter_user }}"
-      password: "{{ vcenter_pass }}"
-      validate_certs: "{{ vcenter_validate_certs }}"
       name: "{{ vcenter_guest_name }}"
       datacenter: "RedHat Test Environment"
       cluster: "RedHat"
