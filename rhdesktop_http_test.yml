@@ -5,6 +5,6 @@
 
   tasks:
   - name: "Calling Firefox. Please see desktop terminal"
-    command: "firefox http://{{ ansible_default_ipv4.address }} --display=:0 2>&1 &"
+    command: "firefox --new-window http://{{ ansible_default_ipv4.address }} --display=:0 2>&1 &"
     delegate_to: rhdesktop.internal.pineview.co.nz
 ...
