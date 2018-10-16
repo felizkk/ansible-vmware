@@ -14,10 +14,10 @@
   gather_facts: no
 
   tasks:
-  - name: update index php file
-    template:
-      src: "/tmp/websource/website-{{ website_version }}/jinja/index.php.j2"
-      dest: "/var/www/html/index.php"
+  #- name: update index php file
+  #  template:
+  #    src: "/tmp/websource/website-{{ website_version }}/jinja/index.php.j2"
+  #    dest: "/var/www/html/index.php"
 
   - name: copy the rest of html files
     copy:
