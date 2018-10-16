@@ -15,8 +15,13 @@
 
   tasks:
   - name: clear html directory
-    command: "rm -rf /var/www/html/*"
-    
+    file: 
+      path: /var/www/html
+      state: "{{ item }}"
+    with_items:
+      - absent
+      - directory
+
   # Important Note: to enable Tower to access /tmp, the Job Isolation feature must be disabled
   # On Tower v3.3.0 : Settings - Jobs - Job Isolation - Off
   - name: update index php file
