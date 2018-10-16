@@ -8,6 +8,7 @@
     git:
       repo: "https://github.com/felizkk/php-website-demo.git"
       dest: "/tmp/websource"
+    delegate_to: localhost
   
   - name: update index php file
     template:
