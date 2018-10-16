@@ -1,6 +1,6 @@
 ---
-- name: simple playbook with templates for webserver
-  hosts: "{{ webserver_host }}"
+- name: Download the latest copy of website source codes
+  hosts: tower 
   gather_facts: no
 
   tasks:
@@ -8,8 +8,12 @@
     git:
       repo: "https://github.com/felizkk/php-website-demo.git"
       dest: "/tmp/websource"
-    delegate_to: localhost
-  
+
+- name: Deploy new website to Webservers
+  hosts: "{{ webserver_host }}"
+  gather_facts: no
+
+  tasks:
   - name: update index php file
     template:
       src: "/tmp/websource/website-{{ website_version }}/jinja/index.php.j2"
