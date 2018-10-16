@@ -11,7 +11,7 @@
   
   - name: update index php file
     template:
-      src: "/tmp/websource/website-{{ update_version }}/jinja/index.php.j2"
+      src: "/tmp/websource/website-{{ website_version }}/jinja/index.php.j2"
       dest: "/var/www/html/index.php"
 
   - name: copy the rest of html files
@@ -19,7 +19,7 @@
       src: "{{ item }}"
       dest: /var/www/html/
     with_items:
-      - "/tmp/websource/website-{{ update_version }}/static/ingram_micro.png"
-      - "/tmp/websource/website-{{ update_version }}/static/ansible-tower-small.png"
-      - "/tmp/websource/website-{{ update_version }}/static/style.css"
+      - "/tmp/websource/website-{{ website_version }}/static/ingram_micro.png"
+      - "/tmp/websource/website-{{ website_version }}/static/ansible-tower-small.png"
+      - "/tmp/websource/website-{{ website_version }}/static/style.css"
 ...

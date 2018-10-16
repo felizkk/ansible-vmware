@@ -18,6 +18,7 @@
       - php-mysql
       - libsemanage-python
       - ntp
+      - git
     when:
       - ansible_distribution == "RedHat"
       - ansible_distribution_major_version == "7"
@@ -42,6 +43,7 @@
       - php
       - php-mysql
       - ntp
+      - git
     when:
       - ansible_distribution == "Ubuntu"
     notify: restart apache
