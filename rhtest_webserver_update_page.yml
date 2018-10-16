@@ -23,10 +23,6 @@
 
   - name: copy the rest of html files
     copy:
-      src: "{{ item }}"
+      src: "/tmp/websource/website-{{ website_version }}/static/"
       dest: /var/www/html/
-    with_items:
-      - "/tmp/websource/website-{{ website_version }}/static/ingram_micro.png"
-      - "/tmp/websource/website-{{ website_version }}/static/ansible-tower-small.png"
-      - "/tmp/websource/website-{{ website_version }}/static/style.css"
 ...
