@@ -1,0 +1,37 @@
+---
+- name: VMWare create a new VM from template
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+  # Expect to fill below variables from Tower survey
+  # Example:
+  # vcenter_guest_name: rhtest1.internal.example.co.nz
+  # vcenter_template_name: rhel75_template
+  # vcenter_datacenter: Auckland_PV
+  # vcenter_cluster: RedHatCluster
+  # vcenter_memory: 2048 -- this is in MB
+  # vcenter_cpu: 2
+  # vcenter_disk: 10 -- this is in GB
+  # vcenter_network: RedHat158
+  - name: Clone the vCenter Template
+    vmware_guest:
+      name: "{{ vcenter_guest_name }}" 
+      template: "{{ vcenter_template_name }}"
+      datacenter: "{{ vcenter_datacenter }}"
+      cluster: "{{ vcenter_cluster }}"
+      folder: "/"
+      hardware:
+        memory_mb: "{{ vcenter_memory }}"
+        num_cpus: "{{ vcenter_cpu }}"
+      disk:
+      - datastore: "{{ vcenter_datastore }}"
+        size_gb: "{{ vcenter_disk }}"
+        type: thin
+      networks:
+      - name: "{{ vcenter_network }}"
+      state: poweredon
+      wait_for_ip_address: yes
+    delegate_to: localhost
+...
