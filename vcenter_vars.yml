@@ -1,5 +1,0 @@
-vcenter_guest_name: rhtest4.internal.rhelvc
-vcenter_template_name: rhrhel75template.internal.rhelvc
-vcenter_memory: 2048
-vcenter_cpu: 1
-vcenter_disk: 10
