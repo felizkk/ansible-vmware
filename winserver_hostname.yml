@@ -1,5 +1,5 @@
 ---
-- name: Windows Server Simple Playbook Demo
+- name: Windows Server Change Hostname
   hosts: "{{ target_host_name }}*"
 
   tasks:
