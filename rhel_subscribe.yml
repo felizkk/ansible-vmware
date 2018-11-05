@@ -1,0 +1,18 @@
+---
+- name: Subscribe to RHEL Subscription
+  hosts: "{{ target_host_name }}*"
+  gather_facts: no
+  
+  tasks:
+  - name: Update hostname
+    hostname:
+      # The variable name is sourced from dynamic inventory variable
+      name: "{{ name }}"
+    
+  - name: Register and attach RHEL Subscription Pool ID
+    redhat_subscription:
+      state: present
+      username: "{{ redhat_user }}"
+      password: "{{ redhat_pass }}"
+      pool_ids: "{{ redhat_poolid }}"
+...
