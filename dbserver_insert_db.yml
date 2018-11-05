@@ -1,5 +1,5 @@
 ---
-- name: Simple MySQL Insert Table
+- name: MySQL Insert Table
   hosts: "{{ target_host_name }}*" 
   gather_facts: no
 

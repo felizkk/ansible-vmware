@@ -1,0 +1,37 @@
+---
+- name: Windows Server Simple Playbook Demo
+  hosts: "{{ target_host_name }}*"
+
+  tasks:
+  # Setting up dummy registry entries
+  - name: Create registry path MyCompanySoftware
+    win_regedit:
+      path: HKCU:\Software\MyCompanySoftware  
+  - name: Add or update registry path MyCompanySoftware, with entry 'name'
+    win_regedit:
+      path: HKCU:\Software\MyCompanySoftware
+      name: name
+      data: felizkarnadi
+  - name: Add or update registry path MyCompanySoftware, with entry 'employeeid'
+    win_regedit:
+      path: HKCU:\Software\MyCompanySoftware
+      name: employeeid
+      data: 113355
+
+  # Install MSI for 7Zip
+  - name: download the 7-Zip package
+    win_get_url:
+      url: http://www.7-zip.org/a/7z1701-x64.msi
+      dest: C:\temp\7z.msi
+  - name: ensure 7-Zip is installed via win_package
+    win_package:
+      path: C:\temp\7z.msi
+      state: present
+
+  # Install/Update Firefox using Chocolatey.org package manager
+  # Chocolatey is going to be auto-installed if not present
+  - name: install Firefox using Chocolatey.org
+    win_chocolatey:
+      name: firefox
+      state: latest
+...

@@ -1,5 +1,5 @@
 ---
-- name: Simple MySQL Initial Database Creation
+- name: MySQL Initial Database Creation
   hosts: "{{ target_host_name }}*"
   gather_facts: no
 
