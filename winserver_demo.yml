@@ -3,6 +3,18 @@
   hosts: "{{ target_host_name }}*"
 
   tasks:
+  # Set Computer Hostname, we get name variable from inventory host variable
+  - name: set windows hostname
+    win_hostname:
+      name: "{{ name }}"
+    register: hostname_change_result
+  - name: reboot if required
+    win_reboot:
+    when: hostname_change_result.reboot_required
+  - name: wait for windows connection
+    wait_for_connection:
+    when: hostname_change_result.reboot_required
+
   # Setting up dummy registry entries
   - name: Create registry path MyCompanySoftware
     win_regedit:
@@ -26,7 +38,7 @@
   - name: download the 7-Zip package
     win_get_url:
       url: http://www.7-zip.org/a/7z1701-x64.msi
-      dest: C:\insatller\7z.msi
+      dest: C:\installer\7z.msi
   - name: ensure 7-Zip is installed via win_package
     win_package:
       path: C:\installer\7z.msi
