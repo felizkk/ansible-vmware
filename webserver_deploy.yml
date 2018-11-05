@@ -1,6 +1,6 @@
 ---
 - name: simple playbook with templates for webserver
-  hosts: "{{ target_host_name }}*" 
+  hosts: "{{ target_host_name }}*"
 
   vars:
     - http_port: 80
