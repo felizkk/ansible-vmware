@@ -8,6 +8,7 @@
     win_hostname:
       name: "{{ name }}"
     register: hostname_change_result
+    when: ansible_fqdn != {{ name }}
   - name: reboot if required
     win_reboot:
     when: hostname_change_result.reboot_required
