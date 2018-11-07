@@ -24,7 +24,7 @@
       template: "{{ vcenter_template_name }}"
       datacenter: "{{ vcenter_datacenter_name }}"
       cluster: "{{ vcenter_cluster_name }}"
-      folder: "{{ vcenter_datacenter_name }}{{ vcenter_folder_name }}"
+      folder: "{{ vcenter_folder_name }}"
       hardware:
         memory_mb: "{{ vcenter_memory }}"
         num_cpus: "{{ vcenter_cpu }}"
@@ -45,7 +45,7 @@
       template: "{{ vcenter_template_name }}"
       datacenter: "{{ vcenter_datacenter_name }}"
       cluster: "{{ vcenter_cluster_name }}"
-      folder: "{{ vcenter_datacenter_name }}{{ vcenter_folder_name }}"
+      folder: "{{ vcenter_folder_name }}"
       hardware:
         memory_mb: "{{ vcenter_memory }}"
         num_cpus: "{{ vcenter_cpu }}"
