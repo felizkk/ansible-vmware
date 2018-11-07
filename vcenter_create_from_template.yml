@@ -29,7 +29,8 @@
         memory_mb: "{{ vcenter_memory }}"
         num_cpus: "{{ vcenter_cpu }}"
       disk:
-      - datastore: "{{ vcenter_datastore_name }}"
+      - size_gb: "{{ vcenter_disk }}"
+        datastore: "{{ vcenter_datastore_name }}"
         type: thin
       networks:
       - name: "{{ vcenter_network_name }}"
@@ -49,7 +50,8 @@
         memory_mb: "{{ vcenter_memory }}"
         num_cpus: "{{ vcenter_cpu }}"
       disk:
-      - datastore: "{{ vcenter_datastore_name }}"
+      - size_gb: "{{ vcenter_disk }}"
+        datastore: "{{ vcenter_datastore_name }}"
         type: thin
       networks:
       - name: "{{ vcenter_network_name }}"
