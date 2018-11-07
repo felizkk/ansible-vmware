@@ -11,6 +11,7 @@
   # vcenter_template_name : rhel75_template
   # vcenter_datacenter_name : Auckland_PV
   # vcenter_cluster_name : RedHatCluster
+  # vcenter_folder_name : Auckland_PV/RedHat
   # vcenter_network_name : RedHat158
   # vcenter_datastore_name: VSAN
   # vcenter_memory : 2048 -- this is in MB
@@ -23,7 +24,7 @@
       template: "{{ vcenter_template_name }}"
       datacenter: "{{ vcenter_datacenter_name }}"
       cluster: "{{ vcenter_cluster_name }}"
-      folder: "{{ vcenter_folder_name }}"
+      folder: "{{ vcenter_datacenter_name }}{{ vcenter_folder_name }}"
       hardware:
         memory_mb: "{{ vcenter_memory }}"
         num_cpus: "{{ vcenter_cpu }}"
@@ -44,7 +45,7 @@
       template: "{{ vcenter_template_name }}"
       datacenter: "{{ vcenter_datacenter_name }}"
       cluster: "{{ vcenter_cluster_name }}"
-      folder: "{{ vcenter_folder_name }}"
+      folder: "{{ vcenter_datacenter_name }}{{ vcenter_folder_name }}"
       hardware:
         memory_mb: "{{ vcenter_memory }}"
         num_cpus: "{{ vcenter_cpu }}"
