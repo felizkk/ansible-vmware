@@ -58,6 +58,6 @@
       state: poweredon
       wait_for_ip_address: yes
       customization_spec: "{{ vcenter_customization_name }}"
-    when: vcenter_customization_name != ""
+    when: vcenter_customization_name != "None"
     delegate_to: localhost
 ...
