@@ -15,24 +15,47 @@
   # vcenter_datastore_name: VSAN
   # vcenter_memory : 2048 -- this is in MB
   # vcenter_cpu : 2
-  # vcenter_disk : 10 -- this is in GB
+  # vcenter_folder_name : RedHat
+  # vcenter_customization_name : RHEL75-Custom-1
+
   - name: Clone the vCenter Template
     vmware_guest:
       name: "{{ vcenter_guest_name }}" 
       template: "{{ vcenter_template_name }}"
       datacenter: "{{ vcenter_datacenter_name }}"
       cluster: "{{ vcenter_cluster_name }}"
-      folder: "/"
+      folder: "{{ vcenter_folder_name }}"
       hardware:
         memory_mb: "{{ vcenter_memory }}"
         num_cpus: "{{ vcenter_cpu }}"
       disk:
       - datastore: "{{ vcenter_datastore_name }}"
-        size_gb: "{{ vcenter_disk }}"
         type: thin
       networks:
       - name: "{{ vcenter_network_name }}"
       state: poweredon
       wait_for_ip_address: yes
+    when: vcenter_customization_name == "None"
+    delegate_to: localhost
+
+  - name: Clone the vCenter Template with Customization
+    vmware_guest:
+      name: "{{ vcenter_guest_name }}" 
+      template: "{{ vcenter_template_name }}"
+      datacenter: "{{ vcenter_datacenter_name }}"
+      cluster: "{{ vcenter_cluster_name }}"
+      folder: "{{ vcenter_folder_name }}"
+      hardware:
+        memory_mb: "{{ vcenter_memory }}"
+        num_cpus: "{{ vcenter_cpu }}"
+      disk:
+      - datastore: "{{ vcenter_datastore_name }}"
+        type: thin
+      networks:
+      - name: "{{ vcenter_network_name }}"
+      state: poweredon
+      wait_for_ip_address: yes
+      customization_spec: "{{ vcenter_customization_name }}"
+    when: vcenter_customization_name != ""
     delegate_to: localhost
 ...

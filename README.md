@@ -1,5 +1,7 @@
 # Ansible Tower Roadshow for VMWare 
 
+TO-BE-UPDATED as I'm doing a refactoring right now
+
 No roles are used in the playbook because it is better to show a flat playbook at roadshows
 
 Some Ansible Playbook examples for simple VMWare vCenter workloads
