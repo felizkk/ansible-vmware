@@ -15,7 +15,6 @@
   # vcenter_datastore_name: VSAN
   # vcenter_memory : 2048 -- this is in MB
   # vcenter_cpu : 2
-  # vcenter_folder_name : /RedHat
   # vcenter_customization_name : RHEL75-Custom-1
 
   - name: Clone the vCenter Template
