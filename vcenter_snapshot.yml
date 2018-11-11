@@ -9,14 +9,14 @@
   - name: remove old snapshot
     vmware_guest_snapshot:
       name: "{{ name }}"
-      snapshot_name: ansible_created_snapshot
+      snapshot_name: "{{ vcenter_snapshot_name }}"
       state: absent
     delegate_to: localhost
 
   - name: create new snapshot
     vmware_guest_snapshot:
       name: "{{ name }}"
-      snapshot_name: ansible_created_snapshot
+      snapshot_name: "{{ vcenter_snapshot_name }}"
       state: present
     delegate_to: localhost
 ...
