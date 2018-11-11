@@ -1,0 +1,12 @@
+---
+- name: VMWare print facts of VMs in a host group
+  hosts: "{{ target_host_name }}"
+  gather_facts: no
+  
+  tasks:
+  - name: gather vcenter facts
+    vmware_guest_facts:
+      name: "{{ vcenter_guest_name }}"
+      datacenter: "{{ vcenter_datacenter_name }}"
+    delegate_to: localhost
+...
