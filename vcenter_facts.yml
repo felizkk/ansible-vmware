@@ -9,4 +9,9 @@
       name: "{{ name }}"
       datacenter: "{{ vcenter_datacenter_name }}"
     delegate_to: localhost
+    register: vm_facts
+
+  - name: display facts
+    debug:
+      var: vm_facts
 ...
