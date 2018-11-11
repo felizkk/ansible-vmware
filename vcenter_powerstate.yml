@@ -4,9 +4,9 @@
   gather_facts: no
 
   tasks:
-- name: "change state to {{ vcenter_target_state }}"
-  vmware_guest_powerstate:
-    name: "{{ name }}"
-    state: "{{ vcenter_target_state }}"
-  delegate_to: localhost
+  - name: change state to {{ vcenter_target_state }}
+    vmware_guest_powerstate:
+      name: "{{ name }}"
+      state: "{{ vcenter_target_state }}"
+    delegate_to: localhost
 ...
