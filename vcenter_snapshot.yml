@@ -10,6 +10,7 @@
   - name: remove old snapshot
     vmware_guest_snapshot:
       datacenter: "{{ vcenter_datacenter_name }}"
+      folder: "{{ vcenter_folder_name }}"
       name: "{{ name }}"
       snapshot_name: "{{ vcenter_snapshot_name }}"
       state: absent
@@ -18,6 +19,7 @@
   - name: create new snapshot
     vmware_guest_snapshot:
       datacenter: "{{ vcenter_datacenter_name }}"
+      folder: "{{ vcenter_folder_name }}"
       name: "{{ name }}"
       snapshot_name: "{{ vcenter_snapshot_name }}"
       state: present
