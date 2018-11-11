@@ -1,0 +1,13 @@
+---
+- name: VMWare change the powerstate of hostgroup VMs
+  hosts: "{{ target_host_name }}*"
+  connection: local
+  gather_facts: no
+
+  tasks:
+- name: Set the state of a virtual machine to {{ vcenter_target_state }}
+  vmware_guest_powerstate:
+    name: "{{ name }}"
+    state: "{{ vcenter_target_state }}"
+  delegate_to: localhost
+...
