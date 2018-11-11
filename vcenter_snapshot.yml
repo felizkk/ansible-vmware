@@ -6,8 +6,10 @@
   tasks:
   # This playbook maintains a single snapshot
   # So the flow is to remove old one first before creating a new one
+  # datacenter parameter is required
   - name: remove old snapshot
     vmware_guest_snapshot:
+      datacenter: "{{ vcenter_datacenter_name }}"
       name: "{{ name }}"
       snapshot_name: "{{ vcenter_snapshot_name }}"
       state: absent
@@ -15,6 +17,7 @@
 
   - name: create new snapshot
     vmware_guest_snapshot:
+      datacenter: "{{ vcenter_datacenter_name }}"
       name: "{{ name }}"
       snapshot_name: "{{ vcenter_snapshot_name }}"
       state: present
