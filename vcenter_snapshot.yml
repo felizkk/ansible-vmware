@@ -1,0 +1,22 @@
+---
+- name: VMWare create snapshots of VMs under a host group
+  hosts: "{{ target_host_name }}"
+  gather_facts: no
+
+  tasks:
+  # This playbook maintains a single snapshot
+  # So the flow is to remove old one first before creating a new one
+  - name: remove old snapshot
+    vmware_guest_snapshot:
+      name: "{{ name }}"
+      snapshot_name: ansible_created_snapshot
+      state: absent
+    delegate_to: localhost
+
+  - name: create new snapshot
+    vmware_guest_snapshot:
+      name: "{{ name }}"
+      snapshot_name: ansible_created_snapshot
+      state: present
+    delegate_to: localhost
+...

@@ -1,6 +1,6 @@
 ---
 - name: VMWare change the powerstate of hostgroup VMs
-  hosts: "{{ target_host_name }}*"
+  hosts: "{{ target_host_name }}"
   gather_facts: no
 
   tasks:
