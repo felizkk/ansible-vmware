@@ -6,7 +6,7 @@
   tasks:
   - name: gather vcenter facts
     vmware_guest_facts:
-      name: "{{ vcenter_guest_name }}"
+      name: "{{ name }}"
       datacenter: "{{ vcenter_datacenter_name }}"
     delegate_to: localhost
 ...
