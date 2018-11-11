@@ -1,6 +1,6 @@
 ---
-- name: simple playbook to remove webserver
-  hosts: rhtest 
+- name: Remove Webserver Packages
+  hosts: "{{ target_host_name }}*" 
   gather_facts: no
 
   vars:
