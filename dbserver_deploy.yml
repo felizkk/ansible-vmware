@@ -21,7 +21,7 @@
       state: started
       enabled: yes
     with_items:
-      - mysqld
+      - mariadb
       - ntpd
 
   - name: enable mysql port 3306
