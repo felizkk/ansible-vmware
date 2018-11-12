@@ -1,6 +1,6 @@
 ---
-- name: Simple DBServer Deployment 
-  hosts: rhsql
+- name: Remove DBServer Packages 
+  hosts: "{{ target_host_name }}*"
 
   tasks:
   - name: remove mysql server, mysql-python, and ntp
