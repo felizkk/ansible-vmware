@@ -9,7 +9,7 @@
       repo: "https://github.com/felizkk/php-website-demo.git"
       dest: "/tmp/websource"
 
- - name: Deploy New Website to Webservers
+- name: Deploy New Website to Webservers
   hosts: "{{ target_host_name }}*"
   gather_facts: no
 
