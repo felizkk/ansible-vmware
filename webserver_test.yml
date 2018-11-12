@@ -1,7 +1,9 @@
 ---
 - name: Test HTTP Output
-  hosts: "{{ webserver_host }}" 
-  gather_facts: yes 
+  hosts: "{{ target_host_name }}*" 
+  gather_facts: no 
+
+  # The tests are done on Tower (localhost)
 
   tasks:
   #- name: install httpie if needed
