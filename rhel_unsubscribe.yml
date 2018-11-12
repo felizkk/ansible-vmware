@@ -1,6 +1,6 @@
 ---
 - name: Unsubscribe RHEL Virtual Machine 
-  hosts: rhtest
+  hosts: "{{ target_host_name }}*"
   gather_facts: no
   
   tasks:
@@ -8,6 +8,5 @@
       state: absent 
       username: "{{ redhat_user }}"
       password: "{{ redhat_pass }}"
-    when:
-      - name == vcenter_guest_name
+      pool_ids: "{{ redhat_poolid }}"
 ...

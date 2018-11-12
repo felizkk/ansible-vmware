@@ -1,10 +1,10 @@
 ---
 - name: Test HTTP Output from Desktop using Firefox
-  hosts: "{{ webserver_host }}" 
+  hosts: "{{ target_host_name }}*" 
   gather_facts: yes
 
   tasks:
-  - name: "Calling Firefox. Please see desktop terminal"
+  - name: "calling Firefox. Please see desktop terminal"
     command: "firefox --new-tab http://{{ ansible_default_ipv4.address }} --display=:0"
     delegate_to: rhdesktop.internal.pineview.co.nz
 ...
