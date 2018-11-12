@@ -1,12 +1,12 @@
 # Install and enable Cockpit
 #  https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/getting_started_with_cockpit/index
 ---
-- name: Install Cockpit Interface on RHEL Servers
+- name: Install Cockpit Interface on RHEL/CentOS Servers
   hosts: "{{ target_host_name }}*"
   vars:
      cockpit_port: 9090
   tasks:
-  - name: Install cockpit and dependancies
+  - name: Install cockpit and dependancies on RHEL7
     yum:
       name: "{{item}}"
       state: present
@@ -14,15 +14,29 @@
     with_items:
     - cockpit
     - cockpit-dashboard
+    when:
+      - ansible_distribution == "RedHat"
+      - ansible_distribution_major_version == "7"
 
-  - name: Enable firewall TCP access on cockpit port
+  - name: Install cockpit and dependancies on CentOS7
+    yum:
+      name: "{{item}}"
+      state: present
+    with_items:
+    - cockpit
+    - cockpit-dashboard
+    when:
+      - ansible_distribution == "CentOS"
+      - ansible_distribution_major_version == "7"
+
+  - name: Enable firewall TCP access on {{ cockpit_port }}
     firewalld:
       port: "{{item}}/tcp"
       immediate: true
       permanent: true
       state: enabled
     with_items:
-    - '{{cockpit_port}}'
+    - '{{ cockpit_port }}'
 
   - name: Enable Cockpit to be running as an on demand socket based service
     systemd:
