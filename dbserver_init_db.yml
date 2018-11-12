@@ -4,11 +4,19 @@
   gather_facts: no
 
   tasks:
-  - name: create a mysql user named ansible
+  - name: create a mysql user named ansible @ %
     mysql_user:
       name: ansible
       password: redhat
       host: "%"
+      priv: "*.*:ALL"
+      state: present
+
+  - name: create a mysql user named ansible @ localhost
+    mysql_user:
+      name: ansible
+      password: redhat
+      host: "localhost"
       priv: "*.*:ALL"
       state: present
 
@@ -27,6 +35,8 @@
       name: theredteam
       login_user: ansible
       login_password: redhat
+      login_unix_socket: "/var/lib/mysql/mysql.sock"
+      config_file: "/etc/my.cnf"
       state: import
       target: /tmp/init_table.sql
 
