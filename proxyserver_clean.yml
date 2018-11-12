@@ -1,6 +1,6 @@
 ---
 - name: Remove HAProxy Packages
-  hosts: "{{ target_host_name }}*"
+  hosts: "{{ target_proxy_name }}*"
 
   vars:
     - http_port: 80
