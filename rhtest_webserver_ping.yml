@@ -1,7 +1,0 @@
----
-- name: vCenter rhtest ping 
-  hosts: rhtest
-  gather_facts: no
-  tasks:
-  - ping:
-...
