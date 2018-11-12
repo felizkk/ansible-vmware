@@ -14,16 +14,11 @@
   gather_facts: no
 
   tasks:
-  - name: find IP address of dbserver
-    setup:
-    register: dbserver_facts
-    delegate_to: "{{ dbserver_host_name }}*"
-
   - name: update dns resolve entries on server
     lineinfile:
       path: /etc/hosts
       regexp: dbserver1
-      line: "{{ dbserver_facts.ansible_default_ipv4[address] }} dbserver1"
+      line: "{{ dbserver_ip_address }} dbserver1"
       state: present
 
   - name: clear html directory
