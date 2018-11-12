@@ -1,7 +1,7 @@
 ---
 - name: Test HTTP Output
   hosts: "{{ target_host_name }}*" 
-  gather_facts: no 
+  gather_facts: yes
 
   # The tests are done on Tower (localhost)
 
