@@ -15,7 +15,7 @@
     - cockpit
     - cockpit-dashboard
 
-  - name: Enable firewall TCP access on {{ cockpit port }}
+  - name: Enable firewall TCP access on cockpit port
     firewalld:
       port: "{{item}}/tcp"
       immediate: true
