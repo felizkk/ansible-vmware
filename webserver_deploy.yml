@@ -8,6 +8,8 @@
     - ntpserver: 0.nz.pool.ntp.org
 
   tasks:
+  # Yum is the package manager of CentOS and RHEL
+  # Have a look at the conditional syntax below, we have both and and or statements
   - name: install apache on RHEL7
     yum:
       name: "{{ item }}"
@@ -18,9 +20,8 @@
       - php-mysql
       - libsemanage-python
       - ntp
-    when:
-      - ansible_distribution == "RedHat"
-      - ansible_distribution_major_version == "7"
+    when: (ansible_distribution == "RedHat" and ansible_distribution_major_version == "7") or 
+          (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
     notify: restart apache
 
   - name: Set SELinux to allow httpd to connect to external database
@@ -28,11 +29,12 @@
       name: httpd_can_network_connect
       state: yes
       persistent: yes
-    when:
-      - ansible_distribution == "RedHat"
-      - ansible_distribution_major_version == "7"
+    when: (ansible_distribution == "RedHat" and ansible_distribution_major_version == "7") or 
+          (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
     notify: restart apache
 
+  # A different when conditional syntax
+  # Apt is the package manager of Ubuntu
   - name: install apache (Ubuntu)
     apt:
       name: "{{ item }}"
