@@ -1,6 +1,6 @@
 ---
-- name: simple playbook with templates for webserver
-  hosts: "{{ vcenter_guest_name }}"
+- name: Deploy HAProxy Server
+  hosts: "{{ target_host_name }}*"
 
   vars:
     - http_port: 80
@@ -32,7 +32,7 @@
     notify: restart firewall
 
   # Config file has been configured to support dynamic inventory rhtest
-  - name: Update haproxy config is the latest
+  - name: ensure haproxy config is the latest
     template:
       src: templates/haproxy.cfg.j2
       dest: /etc/haproxy/haproxy.cfg
