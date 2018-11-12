@@ -4,7 +4,8 @@
   gather_facts: no
   
   tasks:
-  - redhat_subscription:
+  - name: unsubscribe system
+    redhat_subscription:
       state: absent 
       username: "{{ redhat_user }}"
       password: "{{ redhat_pass }}"
