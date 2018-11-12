@@ -6,19 +6,17 @@
   tasks:
   - name: power off VM
     vmware_guest:
-      name: "{{ vcenter_guest_name }}"
+      name: "{{ target_host_name }}"
       datacenter: "{{ vcenter_datacenter_name }}"
       cluster: "{{ vcenter_cluster_name }}"
-      folder: "{{ vcenter_folder_name }}"
       state: poweredoff
     delegate_to: localhost
 
   - name: delete VM
     vmware_guest:
-      name: "{{ vcenter_guest_name }}"
+      name: "{{ target_host_name }}"
       datacenter: "{{ vcenter_datacenter_name }}"
       cluster: "{{ vcenter_cluster_name }}"
-      folder: "{{ vcenter_folder_name }}"
       state: absent
     delegate_to: localhost
 ...

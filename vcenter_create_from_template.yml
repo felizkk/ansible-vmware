@@ -7,7 +7,7 @@
   tasks:
   # Expect to fill below variables from Tower survey
   # Example:
-  # vcenter_guest_name : rhtest1.internal.example.co.nz
+  # target_host_name : rhtest1.internal.example.co.nz
   # vcenter_template_name : rhel75_template
   # vcenter_datacenter_name : Auckland_PV
   # vcenter_cluster_name : RedHatCluster
@@ -20,7 +20,7 @@
 
   - name: Clone the vCenter Template
     vmware_guest:
-      name: "{{ vcenter_guest_name }}" 
+      name: "{{ target_host_name }}" 
       template: "{{ vcenter_template_name }}"
       datacenter: "{{ vcenter_datacenter_name }}"
       cluster: "{{ vcenter_cluster_name }}"
@@ -41,7 +41,7 @@
 
   - name: Clone the vCenter Template with Customization
     vmware_guest:
-      name: "{{ vcenter_guest_name }}" 
+      name: "{{ target_host_name }}" 
       template: "{{ vcenter_template_name }}"
       datacenter: "{{ vcenter_datacenter_name }}"
       cluster: "{{ vcenter_cluster_name }}"
