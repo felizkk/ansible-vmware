@@ -74,10 +74,10 @@
         </table>
 
         <?php
-            $db_host    = "10.68.158.99";
+            $db_host    = "dbserver1";
             $db_user    = "ansible";
             $db_pass    = "redhat";
-            $db_table   = "theredteam";                  
+            $db_table   = "theredteam";        
                    
             $db_conn    = mysqli_connect($db_host, $db_user, $db_pass, $db_table);
             if (mysqli_connect_errno($db_conn)){
