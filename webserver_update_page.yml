@@ -10,7 +10,7 @@
       dest: "/tmp/websource"
 
  - name: Deploy New Website to Webservers
-  hosts: "{{ target_host_name }}"
+  hosts: "{{ target_host_name }}*"
   gather_facts: no
 
   tasks:
