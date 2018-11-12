@@ -1,6 +1,6 @@
 ---
 - name: Get VM Short Information
-  hosts: rhtest
+  hosts: "{{ target_host_name }}*"
   gather_facts: no 
   
   tasks:
