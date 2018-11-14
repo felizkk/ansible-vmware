@@ -69,7 +69,7 @@
   # Change Windows Power Plan
   - name: change power plan to high performance
     win_power_plan:
-      name: High performance
+      name: 'high performance'
 
   # Install/Update Firefox using Chocolatey.org package manager
   # Chocolatey is going to be auto-installed if not present
