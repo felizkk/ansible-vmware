@@ -77,7 +77,6 @@
       - firefox
       - adobereader
       - vlc
-      - teamviewer
 
   # Firewall Rule to enable RDP
   - name: Enable Windows Firewall Rule 
