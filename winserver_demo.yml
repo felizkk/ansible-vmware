@@ -66,11 +66,6 @@
       path: C:\installer\7z.msi
       state: present
 
-  # Change Windows Power Plan
-  - name: change power plan to high performance
-    win_power_plan:
-      name: 'high performance'
-
   # Install/Update Firefox using Chocolatey.org package manager
   # Chocolatey is going to be auto-installed if not present
   - name: install Firefox using Chocolatey.org
