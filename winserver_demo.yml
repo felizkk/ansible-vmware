@@ -66,12 +66,18 @@
       path: C:\installer\7z.msi
       state: present
 
-  # Install/Update Firefox using Chocolatey.org package manager
+  # Install/Update Software using Chocolatey.org package manager
   # Chocolatey is going to be auto-installed if not present
+  # See https://chocolatey.org/packages for complete package list
   - name: install Firefox using Chocolatey.org
     win_chocolatey:
-      name: firefox
+      name: "{{ item }}"
       state: latest
+    with_items:
+      - firefox
+      - adobereader
+      - vlc
+      - teamviewer
 
   # Firewall Rule to enable RDP
   - name: Enable Windows Firewall Rule 
