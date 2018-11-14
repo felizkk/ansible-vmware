@@ -3,6 +3,17 @@
   hosts: "{{ target_host_name }}*"
 
   tasks:
+  # Warning Windows Current Active User that Automation is running
+  - name: Giving warning to the current user
+    win_say:
+      start_sound_path: C:\Windows\Media\ding.wav
+      msg: Warning, SkyNet is Now Operational. Hasta La Vista, Baby!
+      voice: Microsoft Hazel Desktop
+
+  # Get Windows Product Info
+  - name: Get product id and product key
+      win_product_facts:
+
   # Setting up dummy registry entries
   - name: Create registry path MyCompanySoftware
     win_regedit:
@@ -18,6 +29,29 @@
       name: employeeid
       data: 113355
 
+  # Set format, location and unicode to English New Zealand, reboot if required
+  # Location 183 is New Zealand
+  - name: Set Regional Settings to New Zealand
+    win_region:
+      location: 183
+      format: en-NZ
+      unicode_language: en-NZ
+    register: reboot_result
+
+  # Change Timezone
+  - name : Change Timezone to New Zealand
+    win_timezone:
+      timezone: New Zealand Standard Time
+
+  # Set Page File
+  - name: Set C pagefile, don't override if exists
+    win_pagefile:
+      drive: C
+      initial_size: 2048
+      maximum_size: 2048
+      override: no
+      state: present
+
   # Install MSI for 7Zip
   - name: create installer directory
     win_file:
@@ -31,6 +65,11 @@
     win_package:
       path: C:\installer\7z.msi
       state: present
+
+  # Change Windows Power Plan
+  - name: change power plan to high performance
+    win_power_plan:
+      name: high performance
 
   # Install/Update Firefox using Chocolatey.org package manager
   # Chocolatey is going to be auto-installed if not present
@@ -57,4 +96,24 @@
       name: spooler
       start_mode: auto
       state: started
+
+  # Create URL Chortcut
+  - name: Create a URL shortcut for the Ingram Micro website
+    win_shortcut:
+      src: http://nz.ingrammicro.com/
+      dest: '%Public%\Desktop\Ansible website.url'
+
+  # Create Application Shortcut
+  - name: Create a shortcut for WordPad, with Hotkey
+    win_shortcut:
+      description: Your Favorite WordPad Text Editor
+      src: '%ProgramFiles%\Windows NT\Accessories\wordpad.exe'
+      dest: '%Public%\Desktop\WordPad.lnk'
+      icon: '%ProgramFiles%\Windows NT\Accessories\wordpad.exe,0'
+      hotkey: Ctrl+Alt+W
+  
+  # Reboot if required
+  - name: Reboot Windows if required by previous tasks
+    win_reboot:
+      when: reboot_result.restart_required
 ...
