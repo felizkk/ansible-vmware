@@ -69,7 +69,7 @@
   # Install/Update Software using Chocolatey.org package manager
   # Chocolatey is going to be auto-installed if not present
   # See https://chocolatey.org/packages for complete package list
-  - name: install Firefox using Chocolatey.org
+  - name: install software using Chocolatey.org
     win_chocolatey:
       name: "{{ item }}"
       state: latest
