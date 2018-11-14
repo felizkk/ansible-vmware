@@ -8,7 +8,7 @@
     win_say:
       start_sound_path: C:\Windows\Media\ding.wav
       msg: Warning, SkyNet is Now Operational. Hasta La Vista, Baby!
-      voice: Microsoft Hazel Desktop
+      voice: Microsoft Zira Desktop
 
   # Get Windows Product Info
   - name: Get product id and product key
