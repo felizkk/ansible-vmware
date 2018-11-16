@@ -9,7 +9,7 @@
     command: 'nmcli con mod {{ conn_name }} ipv4.address "{{ ip4_address }}"'
 
   - name: nmcli modification - {{ conn_name }} - gw {{ gw4_address }}
-    command: 'nmcli con mod {{ conn_name }} ipv4.gw "{{ gw4_address }}"'
+    command: 'nmcli con mod {{ conn_name }} ipv4.gateway "{{ gw4_address }}"'
 
   - name: nmcli modification - {{ conn_name }} - dns {{ dns4_address }}
     command: 'nmcli con mod {{ conn_name }} ipv4.dns "{{ dns4_servers }}"'
