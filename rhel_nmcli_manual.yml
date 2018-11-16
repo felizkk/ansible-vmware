@@ -1,0 +1,25 @@
+---
+- name: Change Basic IPv4 Address Settings - Manual nmcli commands
+  hosts: "{{ target_host_name }}*"
+
+  # Due to bug in latest ansible, where NetworkManager-glib has been removed, nmcli module is no longer working
+  # https://github.com/ansible/ansible/issues/48055
+  tasks:
+  - name: nmcli modification - {{ conn_name }} - address {{ ip4_address }}
+    command: 'nmcli con mod {{ conn_name }} ipv4.address "{{ ip4_address }}"'
+
+  - name: nmcli modification - {{ conn_name }} - gw {{ gw4_address }}
+    command: 'nmcli con mod {{ conn_name }} ipv4.gw "{{ gw4_address }}"'
+
+  - name: nmcli modification - {{ conn_name }} - dns {{ dns4_address }}
+    command: 'nmcli con mod {{ conn_name }} ipv4.dns "{{ dns4_servers }}"'
+
+  - name: nmcli modification - {{ conn_name }} - method manual
+    command: 'nmcli con mod {{ conn_name }} ipv4.method "manual"'
+
+  - name: nmcli modification - {{ conn_name }} - autoconnect {{ autoconnect }}    
+    command: 'nmcli con mod {{ conn_name }} connection.autoconnect "{{ autoconnect }}"'
+
+  - name: nmcli modification - {{ conn_name }} - bring up interface
+    command: 'nmcli con up {{ conn_name }}'
+...
