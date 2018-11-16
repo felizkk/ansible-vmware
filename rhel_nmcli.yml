@@ -1,0 +1,14 @@
+---
+- name: Change Basic IPv4 Address Settings
+  hosts: "{{ target_host_name }}"
+
+  tasks:
+  - name: nmcli modification - {{ conn_name }} - {{ ip4_address }}, gw {{ gw4_address }}, dns {{ dns4_address }}
+    nmcli:
+      conn_name: "{{ conn_name }}"
+      ip4: "{{ ip4_address }}"
+      gw4: "{{ gw4_address }}"
+      dns4: "{{ dns4_servers }}"
+      autoconnect: "{{ autoconnect }}"
+      state: present
+...
