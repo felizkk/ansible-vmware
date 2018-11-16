@@ -1,6 +1,6 @@
 ---
 - name: Change Basic IPv4 Address Settings
-  hosts: "{{ target_host_name }}"
+  hosts: "{{ target_host_name }}*"
 
   tasks:
   - name: nmcli modification - {{ conn_name }} - {{ ip4_address }}, gw {{ gw4_address }}, dns {{ dns4_address }}
