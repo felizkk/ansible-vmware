@@ -1,0 +1,31 @@
+---
+- name: Change NTP Server
+  hosts: "{{ target_host_name }}*"
+
+  vars:
+    - ntpserver: "{{ ntp_server }}"
+
+  tasks:
+  - name: install ntp package
+    yum:
+      name: ntp
+      state: present
+
+  - name: Start and enable ntpd
+    service:
+      name: ntpd
+      state: started
+      enabled: yes
+  
+  - name: update ntp config
+    template:
+      src: templates/ntp.conf.j2
+      dest: /etc/ntp.conf
+    notify: restart ntp
+
+  handlers:
+  - name: restart ntp
+    service:
+      name: ntpd
+      state: restarted
+...
