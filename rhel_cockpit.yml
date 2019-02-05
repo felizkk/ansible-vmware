@@ -8,23 +8,21 @@
   tasks:
   - name: Install cockpit and dependancies on RHEL7
     yum:
-      name: "{{item}}"
+      name:
+        - cockpit
+        - cockpit-dashboard
       state: present
       enablerepo: rhel-7-server-extras-rpms,rhel-7-server-optional-rpms
-    with_items:
-    - cockpit
-    - cockpit-dashboard
     when:
       - ansible_distribution == "RedHat"
       - ansible_distribution_major_version == "7"
 
   - name: Install cockpit and dependancies on CentOS7
     yum:
-      name: "{{item}}"
+      name:
+        - cockpit
+        - cockpit-dashboard        
       state: present
-    with_items:
-    - cockpit
-    - cockpit-dashboard
     when:
       - ansible_distribution == "CentOS"
       - ansible_distribution_major_version == "7"
