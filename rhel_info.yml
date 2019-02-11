@@ -1,9 +1,0 @@
----
-- name: Get VM Short Information
-  hosts: "{{ target_host_name }}*"
-  gather_facts: no 
-  
-  tasks:
-  - name: Print Details (hostname, guestid, ip address)
-    debug: msg="{{ name }}, {{ guest.guestid }}, {{ guest.ipaddress }}"
-...
